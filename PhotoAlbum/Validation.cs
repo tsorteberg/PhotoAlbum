@@ -41,7 +41,7 @@ namespace PhotoAlbum
                     {
                         valid = true;
                     }
-                    else if (result < 1 || result > 100)
+                    else if (result < lowAlbumID || result > highAlbumID)
                     {
                         // Display an error message.
                         Console.WriteLine("Invalid photo album number.\n");
