@@ -33,11 +33,10 @@ namespace TestPhotoAlbum
             // ARRANGE
             string input = "x";
             bool sentinel;
-            bool expected;
+            bool expected = true;
 
             // ACT
             sentinel = Validation.Sentinel(input);
-            expected = true;
 
             // ASSERT
             Assert.Equal(sentinel, expected);
@@ -48,15 +47,12 @@ namespace TestPhotoAlbum
         {
             // ARRANGE
             string input = "X";
-            bool sentinel;
-            bool expected;
 
             // ACT
-            sentinel = Validation.Sentinel(input);
-            expected = true;
+            bool sentinel = Validation.Sentinel(input);
 
             // ASSERT
-            Assert.Equal(sentinel, expected);
+            Assert.True(sentinel);
         }
 
         [Fact]
@@ -72,7 +68,7 @@ namespace TestPhotoAlbum
             expected = true;
 
             // ASSERT
-            Assert.Equal(sentinel, expected);
+            Assert.Equal(expected, sentinel);
         }
 
         [Fact]
