@@ -1,0 +1,66 @@
+#+TITLE: Tom Sorteberg Feedback
+
+* Overview
+** General
+   - Disclaimer ::
+     These feedback notes tend to feel more negative. This is because the things that feel off tend to jump out more
+     than the things that feel right. I will provide an overall feedback at the top (just after this) that sums up my
+     thoughts going through the code. Hopefully that will help to shed more light on the positive things that I noticed
+     as well.
+     
+   - Overall ::
+     The application runs as expected and is able to pull back the data correctly. The organization of the code is easy
+     to follow and the function tended to be short and simple. The largest challenge when reading through the code was
+     trying to ignore all of the comments that, in some place, doubled the amount of lines to read. I understand that
+     comments are something that are stressed academically, but in practice they tend to be clutter, or a sign that you
+     should separate parts of your code.
+
+     The testing of the application was isolated to only the Validation and JSON API classes. This suggests that you
+     may not have experience with mocking data or utilizing Dependency Injection. If that is the case, I would recommend
+     looking into those two things as they have become an essential part of professional development. The tests that
+     were included were short, easy to follow, and covered a good range of scenarios.
+
+     Overall the code was easy to read through and the majority of issues found were about styling and organization.
+     Both of which come from the experience of working with other developers and on larger application. 
+  
+** Style
+   - Too Many Comments ::
+     I am sure that in more educational environment comments are encouraged. However, I personally feel that comments
+     tend to add more clutter and don't provide clarity that another function couldn't have added. If the comment over
+     some lines of codes is helpful, that comment should become the name of a function that encapsulates that logic.
+
+* Application Code
+** Program.cs
+   - While Loop Condition ::
+     I find that it is typically nicer to have the condition of the loop closure defined in the while clause. This
+     allows the person reading the code to easily identify how the loop is exited.
+
+   - Inconsistent Var ::
+     The is something of a personal pet peeve. When I see someone using and not using var from line to line, it makes
+     the code feel more patchwork than it would otherwise. To me this gives the impression of copy/pasting code without
+     fully understanding the code or having it conform to your standard.
+
+** Validation.cs
+   - Consolidate Boolean Condition ::
+     In your 'Sentinel' function, you can simplify the boolean condition by performing a 'ToLower()'. You can then
+     even simply return your boolean expresstion.     
+
+* Tests  
+  - TestValidObjectPhoto ::
+    This test doesn't really test your logic, but instead tests that dotnet can asign values correctly.
+
+  - Define and Set Expected ::
+    In your arrange, you should be able to define and set your expected value. this will help your tests be more concise
+    and keep your act section cleaner.
+
+  - Condense Boolean Assertions ::
+    You can use 'Assert.True' or 'Assert.False' for boolean condition to have more concise tests.
+
+  - Expected, Actual ::
+    For the Assert.Equal function, the parameter order is (expected, actual). You should try to keep that matching as
+    the output of the tests will references the values in that way.
+
+  - Separate Different class tests into different files ::
+    Typically you will see the organization of your test files match the organization of your application code. This
+    helps to easily find the test associated with your application code and allows you to quickly read through the logic
+    that can be verified.

@@ -14,59 +14,56 @@ namespace PhotoAlbum
 {
     class Program
     {
-        // Main method.
         static void Main(string[] args)
         {
-            // Variable declaration and initialization.
-            bool loop = true;
             bool valid = false;
 
-            // Output program header.
             Console.WriteLine("** Wecome to the Photo Album Viewer **");
+            var albumInput = PromptUserForInput();
 
-            // Main program loop.
-            while (loop) {
-
-                // Prompt to enter album number.
-                Console.Write("\nPlease enter a photo album number to view (1-100) or 'x' to exit: ");
-                string albumInput = Console.ReadLine();
-                Console.WriteLine("");
-
-                // Method call to verify if sentinel value was entered.  If true, then exit main loop.
-                if (Validation.Sentinel(albumInput)) {
-                    loop = false;
-                }
-
+            while (!Validation.Sentinel(albumInput))
+            {
                 // Method call for input validation.
+                // I could probalby work out that 'valid = Validation.Validate(albumInput)' does validataion :)
                 valid = Validation.Validate(albumInput);
 
-                // Execute only if input is valid.
                 if (valid)
                 {
-                    // Update url based on input.
-                    string apiUrl = "https://jsonplaceholder.typicode.com/photos?albumId=" + albumInput;
-
-                    // Method call to retrieve JSON data from URL.
+                    var apiUrl = GetUrlFromInput(albumInput);
                     var photos = JSONAPI.ReadAlbum(apiUrl);
 
-                    // Only call method if photos array is not null.
                     if (photos != null)
                     {
-                        // Diplay photo album header.
                         Console.WriteLine("** Displaying Photo Album: " + albumInput + " **\n");
-                        // Method call to display Photo objects.
                         Photo.Display(photos);
                     }
-                    // If object is null, display error message.
                     else if (photos is null)
                     {
-                        // Display error message.
                         Console.WriteLine("Invalid photo album number.\n");
                     }
                 }
+                
+                albumInput = PromptUserForInput();
             }
 
-            // Notify user on program exit.
+            NotifyUserOnProgramExit();
+        }
+
+        private static string GetUrlFromInput(string input)
+        {
+            return "https://jsonplaceholder.typicode.com/photos?albumId=" + input;
+        }
+
+        private static string PromptUserForInput()
+        {
+            Console.Write("\nPlease enter a photo album number to view (1-100) or 'x' to exit: ");
+            var albumInput = Console.ReadLine();
+            Console.WriteLine("");
+            return albumInput;
+        }
+
+        private static void NotifyUserOnProgramExit()
+        {
             Console.WriteLine("The Program has exited.\n");
             Console.WriteLine("Thank you for using the Photo Album Viewer!");
         }

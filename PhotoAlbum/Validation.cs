@@ -66,17 +66,7 @@ namespace PhotoAlbum
         /// <returns>Returns a boolean value.  True if sentinel; otherwise, false.</returns>
         public static bool Sentinel(string input)
         {
-            // Local variable declaration and initialization.
-            bool sentinel = false;
-
-            // If 'x' or 'X' sentinel value has been entered.
-            if (input == "x" || input == "X")
-            {
-                sentinel = true;
-            }
-
-            // Return statement.
-            return sentinel;
+            return input.ToLower() == "x";
         }
     }
 }
